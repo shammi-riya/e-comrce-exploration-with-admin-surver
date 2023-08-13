@@ -65,17 +65,16 @@ async function run() {
 
 
 
-        app.post('/jwt', (req, res) => {
-            const body = req.body;
-            if (body.email) {
-                const token = jwt.sign({ email: body.email }, process.env.access_token_secret, { expiresIn: '1h' });
-                console.log(token);
-                res.send({ token });
-            } else {
-                res.status(400).send('Email is required');
-            }
-        });
-        
+       app.post('/jwt', (req, res) => {
+    const body = req.body;
+    if (body.email) {
+        const token = jwt.sign({ email: body.email }, process.env.access_token_secret, { expiresIn: '30d' }); // Set expiration to 1 month (30 days)
+        console.log(token);
+        res.send({ token });
+    } else {
+        res.status(400).send('Email is required');
+    }
+});
 
 
 
